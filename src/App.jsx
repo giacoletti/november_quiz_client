@@ -17,7 +17,7 @@ const App = () => {
   };
 
   let questionList;
-  
+
   if (quiz.questions) {
     questionList = quiz.questions.map((question, index) => {
       return <li key={index}>{question.question}</li>;
@@ -26,11 +26,15 @@ const App = () => {
 
   return (
     <>
-      <CategorySelector onCategoryChange={setCategory} />
-      <DifficultySelector onDifficultyChange={setDifficulty} />
-      <button data-cy="create-button" onClick={createQuiz}>
-        Create Quiz
-      </button>
+      {!quiz.questions &&
+        <div data-cy="create-form">
+          <CategorySelector onCategoryChange={setCategory} />
+          <DifficultySelector onDifficultyChange={setDifficulty} />
+          <button data-cy="create-button" onClick={createQuiz}>
+            Create Quiz
+          </button>
+        </div>
+      }
       <div data-cy="quiz-list">{questionList}</div>
     </>
   );
