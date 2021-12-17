@@ -1,14 +1,17 @@
 import { api } from "./network";
 
 const Quizzes = {
-  async create({ category, difficulty }) {
-    const { data } = await api.post("/quizzes", {
-      params: {
-        category: category,
-        difficulty: difficulty,
-      },
-    });
-    return data;
+  create({ category, difficulty }) {
+
+    return async dispatch => {
+      const { data } = await api.post("/quizzes", {
+        params: {
+          category: category,
+          difficulty: difficulty,
+        },
+      });
+      dispatch({ type: 'STORE_QUIZ', payload: data.quiz });
+    }
   },
 };
 
