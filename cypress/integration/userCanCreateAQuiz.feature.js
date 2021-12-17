@@ -18,7 +18,7 @@ describe("User can create a quiz by choosing category and difficulty", () => {
     cy.get('[data-cy=create-form]').should('not.exist')
   });
 
-  it('is expected to get collection of questions', () => {
-    cy.get('[data-cy=quiz-list').children().should('have.length', 10)
+  it('is expected to get collection of 4 possible answers', () => {
+    cy.get('[data-cy=quiz-list] div ul').children().should('have.length', 4)
   })
 });
