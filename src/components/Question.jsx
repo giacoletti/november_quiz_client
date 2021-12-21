@@ -17,8 +17,10 @@ const Question = ({ currentQuestion, question, incrementQuestion }) => {
   };
 
   return (
-    <div className="answer box">
-      <span>{currentQuestion + 1}. </span>{question.question}
+    <>
+      <div className="question box">
+        <p><span>{currentQuestion + 1}. </span>{question.question}</p>
+      </div>
       <ul className="answers">
         {answers.map((answer, answerIndex) => {
           return <li
@@ -30,7 +32,7 @@ const Question = ({ currentQuestion, question, incrementQuestion }) => {
           </li>
         })}
       </ul>
-    </div>
+    </>
   );
 };
 

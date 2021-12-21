@@ -24,9 +24,7 @@ const App = () => {
       {!quiz.questions ?
         <CreateQuizForm /> :
         <div data-cy="quiz-list" className="quiz-container">
-          <div className="question box">
-            {questionUI}
-          </div>
+          {questionUI}
         </div>
       }
     </>
