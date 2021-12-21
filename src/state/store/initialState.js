@@ -1,4 +1,5 @@
 export const initialState = {
   quiz: {},
-  currentQuestion: {}, foo: 'bar'
+  currentQuestion: {},
+  submissions: []
 };

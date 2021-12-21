@@ -5,7 +5,11 @@ const rootReducer = (state, action) => {
         ...state,
         quiz: action.payload
       };
-
+    case 'SUBMIT_ANSWER':
+      return {
+        ...state,
+        submissions: [...state.submissions, action.payload]
+      };
     default:
       return state;
   }
