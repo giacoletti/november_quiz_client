@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CreateQuizForm from "./components/CreateQuizForm";
 import Question from './components/Question';
+import Quizzes from "./modules/Quizzes";
 
 const App = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const { quiz } = useSelector(state => state);
+  const { quiz, submissions } = useSelector(state => state);
+  const dispatch = useDispatch();
   let questionUI;
 
   if (quiz.questions) {
@@ -25,6 +27,8 @@ const App = () => {
         <CreateQuizForm /> :
         <div data-cy="quiz-list" className="quiz-container">
           {questionUI}
+          {submissions.length > 0 &&
+            <button data-cy="submit-quiz" onClick={() => dispatch(Quizzes.submit())}>Submit Quiz</button>}
         </div>
       }
     </>

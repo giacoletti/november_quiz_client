@@ -10,7 +10,7 @@ describe('A user can answer a question', () => {
   
   describe('by clicking the first answer', () => {
     it('is expected to store the answer in state and show "Submit Quiz" button', () => {
-      cy.get('[data-cy=question-0-0]').click();
+      cy.contains('July 1st, 1763').click();
       cy.window()
         .its('store')
         .invoke('getState')
@@ -23,6 +23,7 @@ describe('A user can answer a question', () => {
             }
           ]);
         });
+      cy.get('[data-cy=submit-quiz]').should('be.visible');
     });
   });
 });

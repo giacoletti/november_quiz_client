@@ -1,9 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import shuffleArray from '../modules/shuffleArray';
 
 const Question = ({ currentQuestion, question, incrementQuestion }) => {
   let answers = [...question.incorrect_answers, question.correct_answer];
+  answers = shuffleArray(answers);
   const dispatch = useDispatch();
+  
   const onClickHandler = (selector) => {
     dispatch({
       type: 'SUBMIT_ANSWER',
