@@ -28,7 +28,9 @@ const App = () => {
         <div data-cy="quiz-list" className="quiz-container">
           {questionUI}
           {submissions.length > 0 &&
-            <button data-cy="submit-quiz" onClick={() => dispatch(Quizzes.submit())}>Submit Quiz</button>}
+            <button className="box"
+              data-cy="submit-quiz"
+              onClick={() => dispatch(Quizzes.submit())}>Submit Quiz <span>&#x203A;</span></button>}
         </div>
       }
     </>
