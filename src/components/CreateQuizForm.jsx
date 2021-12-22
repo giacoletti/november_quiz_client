@@ -17,10 +17,10 @@ const CreateQuizForm = () => {
   };
 
   return (
-    <div data-cy="create-form">
+    <div className="quiz-container" data-cy="create-form">
       <CategorySelector onCategoryChange={setCategory} />
       <DifficultySelector onDifficultyChange={setDifficulty} />
-      <button data-cy="create-button" onClick={createQuiz}>
+      <button className="box" data-cy="create-button" onClick={createQuiz}>
         Create Quiz
       </button>
     </div>
