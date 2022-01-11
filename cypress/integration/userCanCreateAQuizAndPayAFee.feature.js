@@ -4,7 +4,7 @@ describe('User can create a quiz by choosing category and difficulty and by payi
         fixture: 'apiResult.json'
       })
       .as('getQuizzes');
-    // cy.intercept()
+    // cy.intercept('POST', 'https://r.stripe.com/0', { statusCode: 201 }); //not working ???
     cy.visit('/');
     cy.get('[data-cy=create-form]').should('be.visible');
     cy.get('[data-cy=category]').select('history', { force: true });
@@ -25,6 +25,7 @@ describe('User can create a quiz by choosing category and difficulty and by payi
 
   describe('filling in valid credit card data', () => {
     before(() => {
+      cy.intercept('POST', 'https://r.stripe.com/0', { statusCode: 201 }); 
       cy.get('[data-cy=payment-form]').within(() => {
         cy.get('[data-cy=card-number]').within(() => {
           cy.get('iframe[name^="__privateStripeFrame"]').then(($iframe) => {
