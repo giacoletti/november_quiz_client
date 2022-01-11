@@ -3,8 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import CreateQuizForm from "./components/CreateQuizForm";
 import Question from './components/Question';
 import Quizzes from "./modules/Quizzes";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 const App = () => {
+  const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const { quiz, submissions } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -24,7 +27,9 @@ const App = () => {
   return (
     <>
       {!quiz.questions ?
-        <CreateQuizForm /> :
+        <Elements stripe={stripePromise}>
+          <CreateQuizForm /> 
+        </Elements> :
         <div data-cy="quiz-list" className="quiz-container">
           {questionUI}
           {submissions.length > 0 &&
