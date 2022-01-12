@@ -25,42 +25,20 @@ describe('User can create a quiz by choosing category and difficulty and by payi
 
   describe('filling in valid credit card data', () => {
     before(() => {
-      cy.intercept('POST', 'https://r.stripe.com/0', { statusCode: 201 }); 
+      cy.intercept('POST', 'https://r.stripe.com/0', { statusCode: 201 });
+      cy.intercept('POST', '*api/payments', { body: { paid: true }, statusCode: 201 });
       cy.get('[data-cy=payment-form]').within(() => {
-        cy.get('[data-cy=card-number]').within(() => {
-          cy.get('iframe[name^="__privateStripeFrame"]').then(($iframe) => {
-            const $body = $iframe.contents().find('body');
-            cy.wrap($body)
-              .find('input[name="cardnumber"]')
-              .type('4242424242424242', { delay: 2 });
-          });
-        });
+        cy.get('[data-cy=email]').type('fake@mail.com');
 
-        // cy.fillInStripeElement('exp-date', '1223') // in cypress/support/commands.js;
-
-        cy.get('[data-cy=exp-date]').within(() => {
-          cy.get('iframe[name^="__privateStripeFrame"]').then(($iframe) => {
-            const $body = $iframe.contents().find('body');
-            cy.wrap($body)
-              .find('input[name="exp-date"]')
-              .type('1223', { delay: 2 });
-          });
-        });
-
-        cy.get('[data-cy=cvc]').within(() => {
-          cy.get('iframe[name^="__privateStripeFrame"]').then(($iframe) => {
-            const $body = $iframe.contents().find('body');
-            cy.wrap($body)
-              .find('input[name="cvc"]')
-              .type('123', { delay: 2 });
-          });
-        });
+        cy.fillInStripeElement('cardnumber', '4242424242424242') // in cypress/support/commands.js;
+        cy.fillInStripeElement('exp-date', '1223') // in cypress/support/commands.js;
+        cy.fillInStripeElement('cvc', '123') // in cypress/support/commands.js;
 
         cy.get('[data-cy=submit-payment]').click();
       });
     });
 
-    it('is expected to ...', () => {});
+    it.only('is expected to ...', () => {});
   });
 
   xit('is expected to make a POST request to the API', () => {
